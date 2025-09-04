@@ -7,6 +7,18 @@
 
 Kinetics brings the natural feel of real-world physics to your SwiftUI animations. Built on Swift 6 with strict concurrency compliance, it provides a modern, safe foundation for creating motion that responds to user input, respects boundaries, and feels alive.
 
+<p align="center">
+  <img src="Resources/screen-recording-1.gif" width="33%">
+  <img src="Resources/screen-recording-2.gif" width="33%">
+  <img src="Resources/screen-recording-3.gif" width="33%">
+</p>
+
+<p align="center">
+  <img src="Resources/screen-recording-4.gif" width="33%">
+  <img src="Resources/screen-recording-5.gif" width="33%">
+  <img src="Resources/screen-recording-6.gif" width="33%">
+</p>
+
 ## ✨ Features
 
 ### 🎯 **Retargeting**

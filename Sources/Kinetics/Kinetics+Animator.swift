@@ -126,7 +126,7 @@ public final class SpringAnimator<Value: KineticsValue>: ObservableObject, Sprin
         switch boundary {
         case .rubber:
             // Rubber boundaries may adjust the target based on constraints
-            self.targetValue = boundary.relkineticsTarget(for: target)
+            self.targetValue = boundary.releaseTarget(for: target)
         default:
             self.targetValue = target
         }

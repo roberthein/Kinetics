@@ -123,7 +123,7 @@ public struct RubberBand {
 
     /// Calculates the target value for rubber band boundaries.
     /// Used by the animation system to determine where to animate to.
-    public static func relkineticsTarget(_ x: Double, cfg: RubberBandConfig) -> Double {
+    public static func releaseTarget(_ x: Double, cfg: RubberBandConfig) -> Double {
         switch cfg.mode {
         case let .outside(bounds, _):
             // Clamp to bounds for outside mode
@@ -174,13 +174,13 @@ public enum RubberBandCommit {
     /// Calculates the target value for animation considering rubber band constraints.
     /// - `raw`: The raw, unconstrained target value
     /// - `perComponent`: Rubber band configuration for each component index
-    public static func relkineticsTarget<T: KineticsComponents>(
+    public static func releaseTarget<T: KineticsComponents>(
         raw: T,
         perComponent cfgs: [Int: RubberBandConfig]
     ) -> T where T.FloatType == Double {
         var c = raw.components
         for (i, cfg) in cfgs where i < c.count {
-            c[i] = RubberBand.relkineticsTarget(c[i], cfg: cfg)
+            c[i] = RubberBand.releaseTarget(c[i], cfg: cfg)
         }
         return .init(components: c)
     }

@@ -86,10 +86,10 @@ public enum KineticsBoundary<Value: KineticsValue>: Sendable {
 
     /// Calculates the target value considering boundary constraints.
     /// Rubber boundaries may adjust targets, bounce boundaries pass through unchanged.
-    public func relkineticsTarget(for raw: Value) -> Value {
+    public func releaseTarget(for raw: Value) -> Value {
         switch self {
         case .none, .bounce: return raw
-        case let .rubber(cfgs): return RubberBandCommit.relkineticsTarget(raw: raw, perComponent: cfgs)
+        case let .rubber(cfgs): return RubberBandCommit.releaseTarget(raw: raw, perComponent: cfgs)
         }
     }
 
