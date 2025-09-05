@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F61B22E2E69D14D00CA50C6 /* Kinetics in Frameworks */ = {isa = PBXBuildFile; productRef = 2F61B22D2E69D14D00CA50C6 /* Kinetics */; };
+		2F6B5D162E6ACC92006CDD87 /* Kinetics in Frameworks */ = {isa = PBXBuildFile; productRef = 2F6B5D152E6ACC92006CDD87 /* Kinetics */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F6B5D162E6ACC92006CDD87 /* Kinetics in Frameworks */,
 				2F61B22E2E69D14D00CA50C6 /* Kinetics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +73,7 @@
 			name = KineticsDemo;
 			packageProductDependencies = (
 				2F61B22D2E69D14D00CA50C6 /* Kinetics */,
+				2F6B5D152E6ACC92006CDD87 /* Kinetics */,
 			);
 			productName = KineticsDemo;
 			productReference = 2F61B1F12E69CE2B00CA50C6 /* KineticsDemo.app */;
@@ -101,7 +104,7 @@
 			mainGroup = 2F61B1E82E69CE2B00CA50C6;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				2F61B22C2E69D14D00CA50C6 /* XCLocalSwiftPackageReference "../../Kinetics" */,
+				2F6B5D142E6ACC92006CDD87 /* XCRemoteSwiftPackageReference "Kinetics" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2F61B1F22E69CE2B00CA50C6 /* Products */;
@@ -334,16 +337,25 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		2F61B22C2E69D14D00CA50C6 /* XCLocalSwiftPackageReference "../../Kinetics" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../../Kinetics;
+/* Begin XCRemoteSwiftPackageReference section */
+		2F6B5D142E6ACC92006CDD87 /* XCRemoteSwiftPackageReference "Kinetics" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/roberthein/Kinetics";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
 		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		2F61B22D2E69D14D00CA50C6 /* Kinetics */ = {
 			isa = XCSwiftPackageProductDependency;
+			productName = Kinetics;
+		};
+		2F6B5D152E6ACC92006CDD87 /* Kinetics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2F6B5D142E6ACC92006CDD87 /* XCRemoteSwiftPackageReference "Kinetics" */;
 			productName = Kinetics;
 		};
 /* End XCSwiftPackageProductDependency section */

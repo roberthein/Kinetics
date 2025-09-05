@@ -28,7 +28,6 @@ final class AnySettingsItem: ObservableObject, Identifiable {
         self.title = item.title
         self.iconView = AnyView(item.icon)
 
-        // Create closures that capture the item reference
         self.displayValue = { [weak item] in
             item?.selectedOption?.displayName
         }
@@ -64,7 +63,6 @@ final class AnySettingsItem: ObservableObject, Identifiable {
             )
         }
 
-        // Subscribe to item changes and forward them
         item.objectWillChange.sink { [weak self] _ in
             self?.objectWillChange.send()
         }.store(in: &cancellables)

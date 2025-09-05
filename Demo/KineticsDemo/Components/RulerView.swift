@@ -1,17 +1,14 @@
 import SwiftUI
 
-// MARK: - Ruler View (no Binding)
 struct RulerView: View {
     @Environment(\.layoutDirection) private var layoutDirection
 
-    // Internal state (no Binding)
     @State private var currentValue: Double
     @State private var scrollPosition: ScrollPosition = .init(idType: Double.self)
     @State private var isUpdatingFromScroll = false
 
     enum Alignment { case top, bottom }
 
-    // Config
     let alignment: Alignment
     let valueRange: ClosedRange<Double>
     let tickSpacing: Double
@@ -19,7 +16,6 @@ struct RulerView: View {
     let subStepCount: Int
     let onValueChanged: (Double) -> Void
 
-    // Visual constants
     private let tickMarkSize: CGFloat = 22
     private let majorTickHeight: CGFloat = 44
     private let minorTickHeight: CGFloat = 44
@@ -31,11 +27,9 @@ struct RulerView: View {
     private let minorTickMinScale: CGFloat = 0.3
     private let minorTickMaxScale: CGFloat = 0.6
 
-    // Layout / snap
     private var stepLength: CGFloat { tickMarkSize + CGFloat(tickSpacing) }
     private var maxScaleDistance: CGFloat { stepLength }
 
-    // Init (non-binding)
     public init(
         currentValue: Double,
         alignment: Alignment,
@@ -87,25 +81,23 @@ struct RulerView: View {
                             alignment: alignment,
                             stepLength: stepLength
                         )
-                        .frame(width: stepLength) // one snap page
-                        .id(tickValue)            // needed for ScrollPosition
+                        .frame(width: stepLength)
+                        .id(tickValue)
                     }
                 }
                 .scrollTargetLayout()
             }
             .layoutDirectionBehavior(.mirrors(in: .rightToLeft))
             .contentMargins(.horizontal, centerMargins, for: .scrollContent)
-            .scrollTargetBehavior(.snap(step: stepLength))           // center-to-center paging
-            .scrollPosition($scrollPosition, anchor: .center)        // read which tick is centered
+            .scrollTargetBehavior(.snap(step: stepLength))
+            .scrollPosition($scrollPosition, anchor: .center)
             .background {
                 CurrentValueIndicatorView(tickSize: tickMarkSize, tickSpacing: tickSpacing)
             }
             .onAppear {
-                // Set initial position WITHOUT animation
                 scrollToCurrentValue(animated: false)
             }
             .onChange(of: scrollPosition) { _, newPos in
-                // Only update our value; never push the scroll position from here.
                 if let id = newPos.viewID(type: Double.self) {
                     isUpdatingFromScroll = true
                     currentValue = id
@@ -115,11 +107,9 @@ struct RulerView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: 80)
-        .sensoryFeedback(.selection, trigger: currentValue) // haptics on center changes
-        // IMPORTANT: No onChange(currentValue) that calls scrollTo… — lets scrolling stay free.
+        .sensoryFeedback(.selection, trigger: currentValue)
     }
 
-    // Data
     private var majorTickValues: [Double] {
         let lower = valueRange.lowerBound
         let upper = valueRange.upperBound
@@ -131,7 +121,6 @@ struct RulerView: View {
         }
     }
 
-    // Helpers
     private func isApproximatelySelected(_ a: Double, _ b: Double) -> Bool {
         abs(a - b) <= max(stepSize * 0.25, 1e-9)
     }
@@ -156,13 +145,12 @@ struct RulerView: View {
             withAnimation(.snappy) { scrollPosition.scrollTo(id: target) }
         } else {
             var tx = Transaction()
-            tx.disablesAnimations = true     // <- critical: truly no animation
+            tx.disablesAnimations = true
             withTransaction(tx) { scrollPosition.scrollTo(id: target) }
         }
     }
 }
 
-// MARK: - Tick Cell
 private struct TickCell: View {
     let value: Double
     let isSelected: Bool
@@ -238,7 +226,6 @@ private struct TickCell: View {
     }
 }
 
-// MARK: - Tick Label
 private struct TickLabelView: View {
     let value: Double
     let isSelected: Bool
@@ -254,7 +241,6 @@ private struct TickLabelView: View {
     }
 }
 
-// MARK: - Major Tick
 private struct MajorTickMark: View {
     let isSelected: Bool
     let height: CGFloat
@@ -285,7 +271,6 @@ private struct MajorTickMark: View {
     }
 }
 
-// MARK: - Minor Ticks
 private struct MinorTickMarksView: View {
     let subStepCount: Int
     let height: CGFloat
@@ -296,7 +281,7 @@ private struct MinorTickMarksView: View {
     let maxScale: CGFloat
     let alignment: RulerView.Alignment
     let stepLength: CGFloat
-    let directionSign: CGFloat // +1 LTR, -1 RTL
+    let directionSign: CGFloat
 
     var body: some View {
         ForEach(0..<subStepCount, id: \.self) { i in
@@ -317,7 +302,6 @@ private struct MinorTickMarksView: View {
     }
 }
 
-// MARK: - Current Value Indicator
 private struct CurrentValueIndicatorView: View {
     let tickSize: CGFloat
     let tickSpacing: Double
@@ -329,7 +313,6 @@ private struct CurrentValueIndicatorView: View {
     }
 }
 
-// MARK: - Simple step-based snap behavior
 struct SnapScrollTargetBehavior: ScrollTargetBehavior {
     let step: CGFloat
     func updateTarget(_ target: inout ScrollTarget, context: TargetContext) {

@@ -2,7 +2,6 @@ import SwiftUI
 import Combine
 import Kinetics
 
-// MARK: - Main App
 @main
 struct KineticsDemoApp: App {
     var body: some Scene {
@@ -115,7 +114,6 @@ public struct AnimationIndicator: View {
     }
 }
 
-// MARK: - Preview
 
 #Preview {
     ContentView()

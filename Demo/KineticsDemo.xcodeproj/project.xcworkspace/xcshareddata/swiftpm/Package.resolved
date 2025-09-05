@@ -1,0 +1,15 @@
+{
+  "originHash" : "1dff5975bb84e9fedd8de8efd4af56961a2dfadaa7ce7e8c9afc2570d6bc9576",
+  "pins" : [
+    {
+      "identity" : "kinetics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/roberthein/Kinetics",
+      "state" : {
+        "revision" : "4ae7931eeb5d1ae969d02992017608ffdc1ed287",
+        "version" : "1.0.0"
+      }
+    }
+  ],
+  "version" : 3
+}
